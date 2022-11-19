@@ -34,11 +34,20 @@ public class NoiseManager : MonoBehaviour
     private void CheckForMatches()
     {
         int countOfPairs = 0;
-        //simplest case, a couple
+        //simplest case, a pair
         for(int i = 1; i < seats.Count; i++)
         {
-            if (seats[i].studentType != StudentType.NO_STUDENT && seats[i].studentType == seats[i -1].studentType)
+            if (seats[i].studentType != StudentType.NO_STUDENT && seats[i].studentType == seats[i - 1].studentType
+                && seats[i].yCoordinate == seats[i - 1].yCoordinate
+                && seats[i].matchForThisTile == MatchType.NO_MATCH)
+            {
+                seats[i].matchForThisTile = MatchType.PAIR;
+                seats[i - 1].matchForThisTile = MatchType.PAIR;
                 countOfPairs++;
+                soundSlider.value += 0.07f;
+                Debug.Log(soundSlider.value);
+            }
+
         }
         print(countOfPairs);
     }

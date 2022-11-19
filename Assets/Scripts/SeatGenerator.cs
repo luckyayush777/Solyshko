@@ -39,8 +39,6 @@ public class SeatGenerator : MonoBehaviour
     {
         InitiateSeats();
     }
-
-    // Update is called once per frame
     void Update()
     {
        

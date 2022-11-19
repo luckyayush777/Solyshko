@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class SeatBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,6 +16,7 @@ public class SeatBehaviour : MonoBehaviour
     public StudentType studentType = StudentType.NO_STUDENT;
     public int xCoordinate;
     public int yCoordinate;
+    public MatchType matchForThisTile = MatchType.NO_MATCH;
     public delegate void OnSeatingStudent();
     public static event OnSeatingStudent OnClickingSeat;
     void Start()
