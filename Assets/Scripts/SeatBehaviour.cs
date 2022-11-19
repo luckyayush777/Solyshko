@@ -14,6 +14,8 @@ public class SeatBehaviour : MonoBehaviour
     public StudentType studentType = StudentType.NO_STUDENT;
     public int xCoordinate;
     public int yCoordinate;
+    public delegate void OnSeatingStudent();
+    public static event OnSeatingStudent OnClickingSeat;
     void Start()
     {
         childRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -35,16 +37,22 @@ public class SeatBehaviour : MonoBehaviour
             {
                 studentType = StudentType.MALE_STUDENT;
                 childRenderer.sprite = maleStudentSprite;
-                NoiseManager.currentNoiseLevel += 0.05f;
+                OnClickingSeat?.Invoke();
             }
             else if (SeatGenerator.typeAtHand == StudentType.FEMALE_STUDENT)
             {
                 studentType = StudentType.FEMALE_STUDENT;
                 childRenderer.sprite = femaleStudentSprite;
-                NoiseManager.currentNoiseLevel += 0.05f;
+                OnClickingSeat?.Invoke();
+
             }
             SeatGenerator.seatOnHandState = false;
             SeatGenerator.ChangeCursorToDefault();
         }
+    }
+
+    private void OnSeatClick()
+    {
+
     }
 }
