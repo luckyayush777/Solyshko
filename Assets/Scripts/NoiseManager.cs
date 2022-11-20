@@ -58,7 +58,7 @@ public class NoiseManager : MonoBehaviour
                     && (seats[i].studentType != StudentType.NO_STUDENT && seats[i - 1].studentType != StudentType.NO_STUDENT && seats[i - 2].studentType != StudentType.NO_STUDENT) // to check for non empty seats
                     && (seats[i].studentType == seats[i - 1].studentType && seats[i].studentType == seats[i - 2].studentType) // matching of student type
                     && (seats[i].yCoordinate == seats[i - 1].yCoordinate && seats[i].yCoordinate == seats[i - 2].yCoordinate) // same row
-                    && (seats[i].matchForThisTile != MatchType.TRIPLE)) //&& seats[i - 1].matchForThisTile != MatchType.TRIPLE && seats[i - 2].matchForThisTile != MatchType.TRIPLE)) // triple students of same type condition
+                    && (seats[i].matchForThisTile != MatchType.TRIPLE)) // triple students of same type condition
             {
                 print("triplet condition");
                 countOfTriplets++;

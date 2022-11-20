@@ -156,7 +156,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 39652d2a489a98540ba1ca16d1b163da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d44f4bd3703ac4d42b7f78814f23a853, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -194,3 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maleStudentSprite: {fileID: 21300000, guid: cdb744848fd132d40a32d8d004414922, type: 3}
   femaleStudentSprite: {fileID: 21300000, guid: cec8bd620021d3d47ba4fc7104d24db3, type: 3}
+  studentType: 0
+  xCoordinate: 0
+  yCoordinate: 0
+  matchForThisTile: 0
