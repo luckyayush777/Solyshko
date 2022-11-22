@@ -12,6 +12,8 @@ public class NoiseManager : MonoBehaviour
     private Slider soundSlider;
     [SerializeField]
     private TextMeshProUGUI textHolder;
+    [SerializeField]
+    private AudioSource classRoomClip;
 
     private void OnEnable()
     {
@@ -32,6 +34,7 @@ public class NoiseManager : MonoBehaviour
     void Update()
     {
         CheckForMatches();
+        classRoomClip.volume = soundSlider.value;
     }
 
     private void CheckForMatches()

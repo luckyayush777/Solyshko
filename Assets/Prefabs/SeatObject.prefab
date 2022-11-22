@@ -192,8 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dae815c4cd0e4d46ac8f7197a358e9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maleStudentSprite: {fileID: 21300000, guid: cdb744848fd132d40a32d8d004414922, type: 3}
-  femaleStudentSprite: {fileID: 21300000, guid: cec8bd620021d3d47ba4fc7104d24db3, type: 3}
+  maleStudentSprite: {fileID: 21300000, guid: 9c4eb5a545554cf49a736b734f547855, type: 3}
+  femaleStudentSprite: {fileID: 21300000, guid: a784bf4aa651ea74c865ae84d8fcb347, type: 3}
   studentType: 0
   xCoordinate: 0
   yCoordinate: 0
