@@ -85,4 +85,9 @@ public class SeatGenerator : MonoBehaviour
     {
         Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
     }
+
+    public int GetRows()
+    {
+        return noOfRows;
+    }
 }
