@@ -32,7 +32,7 @@ public class SeatGenerator : MonoBehaviour
     private Texture2D cursorTexture;
     [SerializeField]
     private Texture2D cursorTextureFemale;
-
+    private int index;
     
 
     void Start()
@@ -57,6 +57,7 @@ public class SeatGenerator : MonoBehaviour
                 currentInitPos.x += seatGap;
                 currentSeat.GetComponent<SeatBehaviour>().xCoordinate = j + 1;
                 currentSeat.GetComponent<SeatBehaviour>().yCoordinate = i + 1;
+                currentSeat.GetComponent<SeatBehaviour>().index = ++index;
             }
             currentInitPos.y += seatGap;
             currentInitPos.x = initPos.x;

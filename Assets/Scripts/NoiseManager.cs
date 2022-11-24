@@ -17,6 +17,15 @@ public class NoiseManager : MonoBehaviour
     [SerializeField]
     private SeatGenerator seatGenerator;
 
+    [SerializeField]
+    private float singlePersonSoundIncrement;
+    [SerializeField]
+    private float pairSoundIncrement;
+    [SerializeField]
+    private float tripleSoundIncrement;
+    [SerializeField]
+    private float lShapeSoundIncrement;
+
     private void OnEnable()
     {
         SeatBehaviour.OnClickingSeat += ChangeSound;
@@ -37,6 +46,7 @@ public class NoiseManager : MonoBehaviour
     {
         CheckForMatches();
         classRoomClip.volume = soundSlider.value;
+        textHolder.text = "Sound Level : " + soundSlider.value * 100.0f + " %";
     }
 
     private void CheckForMatches()
@@ -52,16 +62,10 @@ public class NoiseManager : MonoBehaviour
                 && seats[i].yCoordinate == seats[i - 1].yCoordinate 
                 && ( seats[i].matchForThisTile == MatchType.NO_MATCH && seats[i - 1].matchForThisTile == MatchType.NO_MATCH ) )
             {
-                if (seats[i].studentType == seats[i + 3].studentType
-                   || seats[i - 1].studentType == seats[i + 3].studentType)
-                {
-                    print("took an L");
-                    countOfLShapes++;
-                }
                 seats[i].matchForThisTile = MatchType.PAIR;
                 seats[i - 1].matchForThisTile = MatchType.PAIR;
                 countOfPairs++;
-                soundSlider.value += 0.07f;
+                soundSlider.value += pairSoundIncrement;
                 textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
             }
             //three people in one row
@@ -75,17 +79,36 @@ public class NoiseManager : MonoBehaviour
                 seats[i].matchForThisTile = MatchType.TRIPLE;
                 seats[i - 1].matchForThisTile = MatchType.TRIPLE;
                 seats[i - 2].matchForThisTile = MatchType.TRIPLE;
-                soundSlider.value += 0.1f;
+                soundSlider.value += tripleSoundIncrement;
                 textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
             }
-            // L condition
-            //if (seats[i].studentType != StudentType.NO_STUDENT && seats[i - 1].studentType != StudentType.NO_STUDENT
-            //     && seats[i].studentType == seats[i - 1].studentType
-            //     && seats[i].yCoordinate == seats[i - 1].yCoordinate
-            //     && (seats[i].matchForThisTile == MatchType.NO_MATCH && seats[i - 1].matchForThisTile == MatchType.NO_MATCH))
-            //{
-            //    
-            //}
+            // L shape
+            if((i + 3 < seats.Count)
+                && (seats[i].studentType != StudentType.NO_STUDENT)
+                && (seats[i].studentType == seats[i - 1].studentType) &&  seats[i].studentType == seats[i + 3].studentType
+                && ( seats[i].matchForThisTile == MatchType.PAIR || seats[i].matchForThisTile == MatchType.NO_MATCH))
+            {
+                print("took an L");
+                countOfLShapes++;
+                seats[i].matchForThisTile = MatchType.L_SHAPE;
+                seats[i - 1].matchForThisTile = MatchType.L_SHAPE;
+                seats[i + 3].matchForThisTile = MatchType.L_SHAPE;
+                soundSlider.value += lShapeSoundIncrement;
+
+            }
+            else if ((i + 3 < seats.Count)
+                && (seats[i].studentType != StudentType.NO_STUDENT)
+                && (seats[i].studentType == seats[i - 1].studentType) &&  seats[i - 1].studentType == seats[i + 2].studentType
+                && (seats[i].matchForThisTile == MatchType.PAIR || seats[i].matchForThisTile == MatchType.NO_MATCH))
+            {
+                print("took an L");
+                countOfLShapes++;
+                seats[i].matchForThisTile = MatchType.L_SHAPE;
+                seats[i - 1].matchForThisTile = MatchType.L_SHAPE;
+                seats[i + 2].matchForThisTile = MatchType.L_SHAPE;
+                soundSlider.value += lShapeSoundIncrement;
+
+            }
 
         }
         print(seatGenerator.GetRows());
@@ -105,7 +128,7 @@ public class NoiseManager : MonoBehaviour
 
     private void ChangeSound()
     {
-        soundSlider.value += 0.05f;
+        soundSlider.value += singlePersonSoundIncrement;
         textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
     }
 

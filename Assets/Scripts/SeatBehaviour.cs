@@ -16,12 +16,19 @@ public class SeatBehaviour : MonoBehaviour
     public StudentType studentType = StudentType.NO_STUDENT;
     public int xCoordinate;
     public int yCoordinate;
+    public int index;
     public MatchType matchForThisTile = MatchType.NO_MATCH;
     public delegate void OnSeatingStudent();
     public static event OnSeatingStudent OnClickingSeat;
+    private AudioSource sittingClip;
     void Start()
     {
         childRenderer = GetComponentInChildren<SpriteRenderer>();
+        sittingClip = GetComponent<AudioSource>();
+        if(sittingClip == null)
+        {
+            print("couldnt attach audio source to script");
+        }
         if (childRenderer == null)
             Debug.Log("Couldnt find sprite renderer in child component");
     }
@@ -40,12 +47,15 @@ public class SeatBehaviour : MonoBehaviour
             {
                 studentType = StudentType.MALE_STUDENT;
                 childRenderer.sprite = maleStudentSprite;
+                sittingClip.Play();
                 OnClickingSeat?.Invoke();
             }
             else if (SeatGenerator.typeAtHand == StudentType.FEMALE_STUDENT)
             {
                 studentType = StudentType.FEMALE_STUDENT;
                 childRenderer.sprite = femaleStudentSprite;
+                sittingClip.Play();
+
                 OnClickingSeat?.Invoke();
 
             }
