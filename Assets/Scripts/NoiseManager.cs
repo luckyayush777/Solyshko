@@ -38,7 +38,7 @@ public class NoiseManager : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(DelayFindSeats(0.2f));
-        textHolder.text = "Sound Level : " + soundSlider.value * 100.0f + " %";
+        textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
     }
 
     // Update is called once per frame
@@ -46,7 +46,9 @@ public class NoiseManager : MonoBehaviour
     {
         CheckForMatches();
         classRoomClip.volume = soundSlider.value;
-        textHolder.text = "Sound Level : " + soundSlider.value * 100.0f + " %";
+        textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
+        //print(soundSlider.value);
+        currentNoiseLevel = soundSlider.value * 100;
     }
 
     private void CheckForMatches()
@@ -66,7 +68,7 @@ public class NoiseManager : MonoBehaviour
                 seats[i - 1].matchForThisTile = MatchType.PAIR;
                 countOfPairs++;
                 soundSlider.value += pairSoundIncrement;
-                textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
+                //textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
             }
             //three people in one row
             else if(i >= 2 // to prevent negative indexing
@@ -80,7 +82,7 @@ public class NoiseManager : MonoBehaviour
                 seats[i - 1].matchForThisTile = MatchType.TRIPLE;
                 seats[i - 2].matchForThisTile = MatchType.TRIPLE;
                 soundSlider.value += tripleSoundIncrement;
-                textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
+                //textHolder.text = "Sound Level : " + Mathf.RoundToInt(soundSlider.value * 100.0f) + " %";
             }
             // L shape
             if((i + 3 < seats.Count)
@@ -88,7 +90,7 @@ public class NoiseManager : MonoBehaviour
                 && (seats[i].studentType == seats[i - 1].studentType) &&  seats[i].studentType == seats[i + 3].studentType
                 && ( seats[i].matchForThisTile == MatchType.PAIR || seats[i].matchForThisTile == MatchType.NO_MATCH))
             {
-                print("took an L");
+                //print("took an L");
                 countOfLShapes++;
                 seats[i].matchForThisTile = MatchType.L_SHAPE;
                 seats[i - 1].matchForThisTile = MatchType.L_SHAPE;
@@ -101,7 +103,7 @@ public class NoiseManager : MonoBehaviour
                 && (seats[i].studentType == seats[i - 1].studentType) &&  seats[i - 1].studentType == seats[i + 2].studentType
                 && (seats[i].matchForThisTile == MatchType.PAIR || seats[i].matchForThisTile == MatchType.NO_MATCH))
             {
-                print("took an L");
+                //print("took an L");
                 countOfLShapes++;
                 seats[i].matchForThisTile = MatchType.L_SHAPE;
                 seats[i - 1].matchForThisTile = MatchType.L_SHAPE;
@@ -111,10 +113,10 @@ public class NoiseManager : MonoBehaviour
             }
 
         }
-        print(seatGenerator.GetRows());
-        print("number of pairs : " + countOfPairs + " ,");
-        print("number of triplets : " + countOfTriplets + ", ");
-        print("number of L shapes : " + countOfLShapes);
+        //print(seatGenerator.GetRows());
+        //print("number of pairs : " + countOfPairs + " ,");
+        //print("number of triplets : " + countOfTriplets + ", ");
+        //print("number of L shapes : " + countOfLShapes);
     }
     
     private IEnumerator DelayFindSeats(float delayTime)

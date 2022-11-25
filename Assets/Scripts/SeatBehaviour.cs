@@ -21,6 +21,7 @@ public class SeatBehaviour : MonoBehaviour
     public delegate void OnSeatingStudent();
     public static event OnSeatingStudent OnClickingSeat;
     private AudioSource sittingClip;
+    private static int noOfSeatsFilled = 0;
     void Start()
     {
         childRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -36,28 +37,36 @@ public class SeatBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (noOfSeatsFilled >= 9)
+        {
+            print("filled seats");
+            GameManager.seatsFilled = true;
+        }
     }
 
     private void OnMouseDown()
     {
+        
+        
+        print(noOfSeatsFilled);
         if (SeatGenerator.seatOnHandState == true)
         {
+            ++noOfSeatsFilled;
             if (SeatGenerator.typeAtHand == StudentType.MALE_STUDENT)
             {
                 studentType = StudentType.MALE_STUDENT;
                 childRenderer.sprite = maleStudentSprite;
                 sittingClip.Play();
                 OnClickingSeat?.Invoke();
+                //print(noOfSeatsFilled);
             }
             else if (SeatGenerator.typeAtHand == StudentType.FEMALE_STUDENT)
             {
                 studentType = StudentType.FEMALE_STUDENT;
                 childRenderer.sprite = femaleStudentSprite;
                 sittingClip.Play();
-
                 OnClickingSeat?.Invoke();
-
+                //print(noOfSeatsFilled);
             }
             SeatGenerator.seatOnHandState = false;
             SeatGenerator.ChangeCursorToDefault();

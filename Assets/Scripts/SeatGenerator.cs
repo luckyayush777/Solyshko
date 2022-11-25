@@ -39,11 +39,6 @@ public class SeatGenerator : MonoBehaviour
     {
         InitiateSeats();
     }
-    void Update()
-    {
-       
-
-    }
 
     private void InitiateSeats()
     {
@@ -80,6 +75,7 @@ public class SeatGenerator : MonoBehaviour
         seatOnHandState = true;
         Cursor.SetCursor(cursorTextureFemale, Vector2.zero, cursorMode);
         typeAtHand = StudentType.FEMALE_STUDENT;
+
     }
 
     public static void ChangeCursorToDefault()
